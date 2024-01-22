@@ -26,6 +26,7 @@ export class CategoryListComponent {
     { label: 'Name (Z-A)', value: 'name,desc' },
   ];
   private readonly searchFormSubscription: Subscription;
+
   constructor(
     private readonly modalCtrl: ModalController,
     private readonly categoryService: CategoryService,
@@ -74,8 +75,12 @@ export class CategoryListComponent {
   ionViewDidLeave(): void {
     this.searchFormSubscription.unsubscribe();
   }
+
   async openModal(category?: Category): Promise<void> {
-    const modal = await this.modalCtrl.create({ component: CategoryModalComponent });
+    const modal = await this.modalCtrl.create({
+      component: CategoryModalComponent,
+      componentProps: { category: category ? { ...category } : {} },
+    });
     modal.present();
     const { role } = await modal.onWillDismiss();
     if (role === 'refresh') this.reloadCategories();
