@@ -1,1 +1,76 @@
-Expense List
+<!-- ------ -->
+<!-- Header -->
+<!-- ------ -->
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Expenses</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<!-- ------- -->
+<!-- Content -->
+<!-- ------- -->
+<ion-content>
+  <!-- Search & sort -->
+  <ion-grid class="ion-padding">
+    <ion-row>
+      <ion-col size="12" size-sm="4">
+        <ion-item>
+          <ion-icon name="swap-vertical" slot="start"></ion-icon>
+          <ion-select interface="popover" value="Date (newest first)">
+            <ion-select-option>Created at (newest first)</ion-select-option>
+            <ion-select-option>Created at (oldest first)</ion-select-option>
+            <ion-select-option>Date (newest first)</ion-select-option>
+            <ion-select-option>Date (oldest first)</ion-select-option>
+            <ion-select-option>Name (A-Z)</ion-select-option>
+            <ion-select-option>Name (Z-A)</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+      <ion-col size="12" size-sm="4">
+        <ion-item>
+          <ion-icon name="pricetag-outline" slot="start"></ion-icon>
+          <ion-select interface="popover" value="Category"> </ion-select>
+        </ion-item>
+      </ion-col>
+      <ion-col size="12" size-sm="4">
+        <ion-item>
+          <ion-icon name="search" slot="start"></ion-icon>
+          <ion-input maxlength="40" placeholder="Search" [clearInput]="true"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <!-- Category list -->
+  <ion-list inset="true">
+    <!-- Categories -->
+    <ion-item button="true" [detail]="true" (click)="openModal()">
+      <ion-label>Auswärts Essen</ion-label>
+    </ion-item>
+  </ion-list>
+
+  <!-- Create fab button -->
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button (click)="openModal()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-row>
+      <ion-button size="large" color="medium" fill="clear" shape="round" (click)="openModal()">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+      <ion-title class="ion-text-center">Footer</ion-title>
+      <ion-button size="large" color="medium" fill="clear" shape="round" (click)="openModal()">
+        <ion-icon name="arrow-forward-outline"></ion-icon>
+      </ion-button>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>
