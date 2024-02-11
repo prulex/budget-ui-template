@@ -38,16 +38,23 @@
         }}</ion-select-option>
       </ion-card>
     </ion-select>
-    <ion-button (click)="showCategoryModal()"><ion-icon name="add"></ion-icon></ion-button>
+    <ion-button (click)="showCategoryModal()">
+      <ion-icon name="add"></ion-icon>
+    </ion-button>
   </ion-item>
   <ion-item>
     <ion-icon name="cash" slot="start"></ion-icon>
-    <ion-input maxlength="40" placeholder="Enter the amount in CHF" required></ion-input>
+    <ion-input [disabled]="submitting" maxlength="40" placeholder="Enter the amount in CHF" required="true"></ion-input>
     CHF
   </ion-item>
   <ion-item>
     <ion-icon name="calendar" slot="start"></ion-icon>
-    <ion-input maxlength="40" placeholder="Date" required></ion-input>
+    <ion-datetime-button datetime="datetime"></ion-datetime-button>
+    <ion-modal [keepContentsMounted]="true">
+      <ng-template>
+        <ion-datetime id="datetime" presentation="date"></ion-datetime>
+      </ng-template>
+    </ion-modal>
   </ion-item>
   <ion-fab slot="fixed" vertical="bottom" horizontal="end">
     <ion-fab-button (click)="delete()" color="danger">
