@@ -31,8 +31,14 @@
   </ion-item>
   <ion-item>
     <ion-icon name="pricetag" slot="start"></ion-icon>
-    <ion-select interface="popover" placeholder="Choose a category"> </ion-select>
-    <ion-button><ion-icon name="add"></ion-icon></ion-button>
+    <ion-select interface="popover" placeholder="Choose a category" (load)="ionViewWillEnter()">
+      <ion-card *ngIf="categoriesLoaded">
+        <ion-select-option *ngFor="let category of categories" [value]="category.id">{{
+          category.name
+        }}</ion-select-option>
+      </ion-card>
+    </ion-select>
+    <ion-button (click)="showCategoryModal()"><ion-icon name="add"></ion-icon></ion-button>
   </ion-item>
   <ion-item>
     <ion-icon name="cash" slot="start"></ion-icon>
@@ -43,7 +49,6 @@
     <ion-icon name="calendar" slot="start"></ion-icon>
     <ion-input maxlength="40" placeholder="Date" required></ion-input>
   </ion-item>
-
   <ion-fab slot="fixed" vertical="bottom" horizontal="end">
     <ion-fab-button (click)="delete()" color="danger">
       <ion-icon name="trash"></ion-icon>

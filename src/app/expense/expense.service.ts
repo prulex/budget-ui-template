@@ -21,7 +21,7 @@ export class ExpenseService {
 
   // Create & Update
 
-  upsertExpense = (expense: Expense): Observable<void> => this.httpClient.put<void>(this.apiUrl, expense);
+  upsertExpense = (expense: Expense, date: any): Observable<void> => this.httpClient.put<void>(this.apiUrl, expense);
 
   // Delete
 
