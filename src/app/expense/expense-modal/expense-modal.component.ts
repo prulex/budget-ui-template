@@ -27,8 +27,8 @@ export class ExpenseModalComponent {
     private readonly categoryService: CategoryService,
   ) {
     this.expenseForm = this.formBuilder.group({
-      id: ['', [Validators.required, Validators.maxLength(40)]],
-      amount: ['', [Validators.required, Validators.maxLength(40), Validators.pattern(/^[0-9]+$/)]],
+      id: [], // hidden,
+      amount: ['', [Validators.required, Validators.maxLength(40)]],
       categoryId: ['', [Validators.required, Validators.maxLength(40)]],
       date: new FormControl(formatISO(new Date())),
       name: ['', [Validators.required, Validators.maxLength(40)]],
@@ -51,7 +51,7 @@ export class ExpenseModalComponent {
       .pipe(finalize(() => (this.submitting = false)))
       .subscribe({
         next: () => {
-          this.toastService.displaySuccessToast('Category saved');
+          this.toastService.displaySuccessToast('Expense saved');
           this.modalCtrl.dismiss(null, 'refresh');
         },
         error: (error) => this.toastService.displayErrorToast('Could not save category', error),

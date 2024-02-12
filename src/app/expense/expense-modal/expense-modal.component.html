@@ -13,7 +13,7 @@
     <ion-title>Add Expense</ion-title>
 
     <ion-buttons slot="end">
-      <ion-button color="medium" (click)="save()">
+      <ion-button (click)="save()">
         <ion-icon slot="start" name="save"></ion-icon>
         Save
       </ion-button>
@@ -27,15 +27,24 @@
 <ion-content class="ion-padding">
   <ion-item>
     <ion-icon name="text" slot="start"></ion-icon>
-    <ion-input maxlength="40" placeholder="Enter the expense's name" required></ion-input>
+    <ion-input
+      [disabled]="submitting"
+      maxlength="40"
+      formControlName="name"
+      placeholder="Enter the expense's name"
+    ></ion-input>
   </ion-item>
   <ion-item>
     <ion-icon name="pricetag" slot="start"></ion-icon>
     <ion-select interface="popover" placeholder="Choose a category" (load)="ionViewWillEnter()">
       <ion-card *ngIf="categoriesLoaded">
-        <ion-select-option *ngFor="let category of categories" [value]="category.id">{{
-          category.name
-        }}</ion-select-option>
+        <ion-select-option
+          [disabled]="submitting"
+          formControlName="categoryId"
+          *ngFor="let category of categories"
+          [value]="category.id"
+          >{{ category.name }}</ion-select-option
+        >
       </ion-card>
     </ion-select>
     <ion-button (click)="showCategoryModal()">
@@ -44,17 +53,28 @@
   </ion-item>
   <ion-item>
     <ion-icon name="cash" slot="start"></ion-icon>
-    <ion-input [disabled]="submitting" maxlength="40" placeholder="Enter the amount in CHF" required="true"></ion-input>
+    <ion-input
+      [disabled]="submitting"
+      maxlength="40"
+      placeholder="Enter the amount in CHF"
+      formControlName="amount"
+      type="number"
+    ></ion-input>
     CHF
   </ion-item>
   <ion-item>
     <ion-icon name="calendar" slot="start"></ion-icon>
-    <ion-datetime-button datetime="datetime"></ion-datetime-button>
-    <ion-modal [keepContentsMounted]="true">
-      <ng-template>
-        <ion-datetime id="datetime" presentation="date"></ion-datetime>
-      </ng-template>
-    </ion-modal>
+    <ion-input [disabled]="submitting" maxlength="40" placeholder="Date" formControlName="date" type="date"></ion-input>
+    <!--
+    Button verschwindet, sobald ich in einem vorderen Input den formControlName hinzufüge..... Keine Ahnung wiso
+    <ion-datetime-button datetime="datetime" >
+     <ion-modal [keepContentsMounted]="true">
+       <ng-template>
+         <ion-datetime id="datetime" presentation="date" formControlName="date" [disabled]="submitting"></ion-datetime>
+       </ng-template>
+     </ion-modal>
+     </ion-datetime-button>
+     -->
   </ion-item>
   <ion-fab slot="fixed" vertical="bottom" horizontal="end">
     <ion-fab-button (click)="delete()" color="danger">

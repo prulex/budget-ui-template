@@ -4,6 +4,10 @@ import { ModalController } from '@ionic/angular';
 import { ExpenseModalComponent } from '../expense-modal/expense-modal.component';
 import { Expense } from '../../shared/domain';
 
+interface ExpenseGroup {
+  date: string;
+  expenses: Expense[];
+}
 @Component({
   selector: 'app-expense-overview',
   templateUrl: './expense-list.component.html',
