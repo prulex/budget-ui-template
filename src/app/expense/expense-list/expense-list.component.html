@@ -72,6 +72,9 @@
       </ion-item-group>
     </ng-container>
   </ion-list>
+  <ion-infinite-scroll [disabled]="lastPageReached || loading" (ionInfinite)="loadNextExpensePage($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 
   <!-- Create fab button -->
   <ion-fab slot="fixed" vertical="bottom" horizontal="end">

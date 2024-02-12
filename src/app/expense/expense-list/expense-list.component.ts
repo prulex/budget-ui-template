@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { addMonths, set } from 'date-fns';
-import { ModalController, RefresherCustomEvent } from '@ionic/angular';
+import { InfiniteScrollCustomEvent, ModalController, RefresherCustomEvent } from '@ionic/angular';
 import { ExpenseModalComponent } from '../expense-modal/expense-modal.component';
 import { CategoryCriteria, Expense, ExpenseUpsertDto, ExpenseCriteria, SortOption } from '../../shared/domain';
 import { CategoryService } from '../../category/category.service';
@@ -105,6 +105,11 @@ export class ExpenseListComponent {
   reloadExpense($event?: any): void {
     this.searchCriteria.page = 0;
     this.loadExpenses(() => ($event ? ($event as RefresherCustomEvent).target.complete() : {}));
+  }
+
+  loadNextExpensePage($event: any) {
+    this.searchCriteria.page++;
+    this.loadExpenses(() => ($event as InfiniteScrollCustomEvent).target.complete());
   }
   isSameMonth(dateString: string): boolean {
     const currentDate = this.date;
